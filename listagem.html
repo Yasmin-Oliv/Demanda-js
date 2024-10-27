@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Alunos Cadastrados</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Lista de Alunos Cadastrados</h1>
+    <div id="listaAlunos"></div>
+    
+    <button onclick="voltarParaCadastro()">Voltar</button>
+  </div>
+
+  <script>
+    function carregarLista() {
+      let alunos = JSON.parse(localStorage.getItem("alunos")) || [];
+      let listaAlunos = document.getElementById("listaAlunos");
+      listaAlunos.innerHTML = ""; 
+
+      alunos.forEach(aluno => {
+        let statusIdade = aluno.maiorIdade ? "Maior de Idade" : "Menor de Idade";
+        let cssClass = aluno.maiorIdade ? "maior" : "menor";
+        listaAlunos.innerHTML += `<p class="${cssClass}">Nome: ${aluno.nome}, Idade: ${aluno.idade} - ${statusIdade}</p>`;
+      });
+    }
+
+    function voltarParaCadastro() {
+      window.location.href = 'index.html';
+    }
+
+    window.onload = carregarLista;
+  </script>
+</body>
+</html>
